@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  loginEndpoint: 'http://localhost:5001/feedaddict/us-central1/login'
 };
 
 /*
