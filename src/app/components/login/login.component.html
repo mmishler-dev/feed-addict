@@ -1,24 +1,46 @@
-<form [formGroup]="loginForm">
-  <div>
-    <label>
-      Email:
-      <input type='text' formControlName="email">
-    </label>
+<section class="login">
+  <div class="row d-flex min-vh-100 justify-content-center align-items-center">
+    <div class="col-lg-5 col-sm-6 col-12">
+      <div class="login-form-container bg-light">
+        <h2 class="login-header"> Login </h2>
+        <form>
+          <div class="form-group" [formGroup]="loginForm">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ emailLabel }}</mat-label>
+              <input matInput formControlName="email" placeholder="{{ emailPlaceholder }}">
+              <mat-error *ngIf="loginForm.controls.email.errors">
+                A valid email is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>{{ passwordLabel }}</mat-label>
+              <input matInput formControlName="password" placeholder="{{ passwordPlaceholder }}">
+              <mat-error *ngIf="loginForm.controls.password.errors">
+                A password is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+          <div class="button-container d-flex justify-content-between">
+            <button
+              class="register-button mat-stroked-button"
+              type="button"
+              (click)="this.redirectNewUser()"
+            >
+              New User?
+            </button>
+            <button
+              class="login-button mat-stroked-button"
+              type="submit"
+              [disabled]="!loginForm.valid"
+              (click)="this.login()"
+            >
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
-  <div>
-    <label>
-      Password:
-    </label>
-    <input type='password' formControlName="password">
-  </div>
-  <div class="form-buttons">
-    <button
-      class="button button-primary"
-      type="submit"
-      [disabled]="!loginForm.valid"
-      (click)="login()"
-    >
-      Login
-    </button>
-  </div>
-</form>
+</section>
+

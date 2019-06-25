@@ -16,6 +16,10 @@ import { TermsAndConditionsComponent } from './components/terms-and-conditions/t
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AppMaterialModule } from './modules/material/app-material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthGuardService } from './services/auth-guard.service';
+import { SuccessModalComponent } from './components/success-modal/success-modal.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,11 @@ import { HttpClientModule } from '@angular/common/http';
     MyAccountComponent,
     SettingsComponent,
     AboutComponent,
-    TermsAndConditionsComponent
+    TermsAndConditionsComponent,
+    SuccessModalComponent
+  ],
+  entryComponents: [
+    SuccessModalComponent
   ],
   imports: [
     BrowserModule,
@@ -37,9 +45,12 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AppMaterialModule,
+    BrowserAnimationsModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })

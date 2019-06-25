@@ -1,3 +1,48 @@
-<p>
-  signup works!
-</p>
+<section class="signup">
+  <div class="row d-flex min-vh-100 justify-content-center align-items-center">
+    <div class="col-lg-5 col-sm-6 col-12">
+      <div class="signup-form-container bg-light">
+        <h2 class="signup-header"> New User Sign-Up </h2>
+        <form>
+          <div class="form-group" [formGroup]="signupForm">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ firstNameLabel }}</mat-label>
+              <input matInput formControlName="firstName" placeholder="{{ firstNamePlaceholder }}">
+              <mat-error *ngIf="signupForm.controls.firstName.errors">
+                A name is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>{{ lastNameLabel }}</mat-label>
+              <input matInput formControlName="lastName" placeholder="{{ lastNamePlaceholder }}">
+              <mat-error *ngIf="signupForm.controls.lastName.errors">
+                A name is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>{{ emailLabel }}</mat-label>
+              <input matInput formControlName="email" placeholder="{{ emailPlaceholder }}">
+              <mat-error *ngIf="signupForm.controls.email.errors">A valid email is required</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>{{ passwordLabel }}</mat-label>
+              <input matInput type="password" formControlName="password" placeholder="{{ passwordPlaceholder }}">
+              <mat-error *ngIf="signupForm.controls.password.errors">A password is required</mat-error>
+            </mat-form-field>
+          </div>
+          <mat-error *ngIf="errorMessage">{{ errorMessage }}</mat-error>
+          <div class="button-container d-flex justify-content-end">
+            <button
+              class="mat-button"
+              type="submit"
+              [disabled]="!signupForm.valid"
+              (click)="this.onSubmit()"
+            >
+              Create User
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

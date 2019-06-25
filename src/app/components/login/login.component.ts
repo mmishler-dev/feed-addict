@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'fa-login',
@@ -13,21 +14,36 @@ export class LoginComponent {
     password: new FormControl('', Validators.required)
   });
 
+  emailLabel = 'Email';
+  emailPlaceholder = 'Email';
+
+  passwordLabel = 'Password';
+  passwordPlaceholder = 'Password';
+
+  errorMessage = '';
+
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
   ) {}
 
   login() {
     if (this.loginForm.valid) {
       const {email, password} = this.loginForm.value;
-      try {
-          this.authService.login(email, password).subscribe((result) => {
-            console.log(result);
-          });
-      } catch (e) {
-        console.log(e);
-      }
+      this.authService.login(email, password).subscribe((result: any) => {
+        const token = JSON.parse(result).token;
+        localStorage.setItem('token', JSON.stringify(token));
+        this.authService.setUserLogggedIn(true);
+        window.location.href = '';
+      }, (error) => {
+        this.errorMessage = 'Invalid username/password';
+        this.authService.setUserLogggedIn(false);
+      });
     }
+  }
+
+  redirectNewUser() {
+    this.router.navigateByUrl('/signup');
   }
 
 }

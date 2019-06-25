@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'fa-header',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.sass']
 })
 export class HeaderComponent implements OnInit {
+  userLoggedIn = false;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(
+    private authService: AuthService
+  ) {
+    this.authService.loginState$.subscribe((userLoggedIn) => {
+      this.userLoggedIn = userLoggedIn;
+    });
   }
 
+  ngOnInit() {}
+
+  onLogout() {
+    this.authService.logout();
+  }
 }

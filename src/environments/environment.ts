@@ -4,7 +4,19 @@
 
 export const environment = {
   production: false,
-  loginEndpoint: 'http://localhost:5001/feedaddict/us-central1/login'
+
+  /**
+   * API Endpoints
+   */
+  apiEndpoint: 'http://localhost:5000',
+  loginEndpoint: '/api/v1/login',
+  signupEndpoint: '/api/v1/signup',
+
+  /**
+   * Auth Environment Variables
+   */
+  tokenKey: 'x8m,Z1?8:#"#p}!V)n',
+  newsApiKey: 'd6284bfa3f444bf7844a5fd66b493474',
 };
 
 /*
